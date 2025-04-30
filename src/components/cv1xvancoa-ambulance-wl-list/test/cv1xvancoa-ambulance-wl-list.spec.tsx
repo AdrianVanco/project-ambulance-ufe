@@ -7,12 +7,10 @@ describe('cv1xvancoa-ambulance-wl-list', () => {
       components: [Cv1xvancoaAmbulanceWlList],
       html: `<cv1xvancoa-ambulance-wl-list></cv1xvancoa-ambulance-wl-list>`,
     });
-    expect(page.root).toEqualHtml(`
-      <cv1xvancoa-ambulance-wl-list>
-        <mock:shadow-root>
-          <slot></slot>
-        </mock:shadow-root>
-      </cv1xvancoa-ambulance-wl-list>
-    `);
+    const wlList = page.rootInstance as Cv1xvancoaAmbulanceWlList;
+    const expectedPatients = wlList?.waitingPatients?.length
+
+    const items = page.root.shadowRoot.querySelectorAll("md-list-item");
+    expect(items.length).toEqual(expectedPatients);
   });
 });
